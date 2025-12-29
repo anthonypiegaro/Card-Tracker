@@ -26,38 +26,39 @@ function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-const signInSchema = z.object({
+const signUpSchema = z.object({
+  name: z.string().min(1, "name is required"),
   email: z.string().min(1, "email is requried"),
   password: z.string().min(1, "password is required")
 })
 
-export type SignInSchema = z.infer<typeof signInSchema>
+export type SignUpSchema = z.infer<typeof signUpSchema>
 
 export default function Auth() {
   const [submitting, setIsSubmitting] = useState(false)
-  const [signInError, setSignInError] = useState<string | null>(null)
+  const [signUpError, setSignUpError] = useState<string | null>(null)
 
-  const form = useForm<SignInSchema>({
-    resolver: zodResolver(signInSchema),
+  const form = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: ""
     }
   })
 
-  const onSubmit = async (values: SignInSchema) => {
+  const onSubmit = async (values: SignUpSchema) => {
     setIsSubmitting(true)
-    const { data, error } = await authClient.signIn.email({
-        email: values.email,
-        password: values.password,
-        rememberMe: true,
-        callbackURL: "/dashboard",
+    const { data, error } = await authClient.signUp.email({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      callbackURL: "/auth"
     })
-
     if (error) {
-      setSignInError(error.message ?? "")
+      setSignUpError(error.message ?? "")
     } else {
-      setSignInError(null)
+      setSignUpError(null)
     }
     setIsSubmitting(false)
   }
@@ -67,11 +68,24 @@ export default function Auth() {
       <div className="">
         <Feather className="h-13 w-13 mb-3 mx-auto" />
         <div className="mb-4">
-          <h2 className="text-xl font-medium leading-none">Welcome Back</h2>
-          <p className="text-sm text-muted-foreground">Sign in with your provided credentials</p>
+          <h2 className="text-xl font-medium leading-none">Welcome</h2>
+          <p className="text-sm text-muted-foreground">Sign up to start tracking</p>
         </div>
         <Form {...form}>
           <form className="flex flex-col gap-y-4 mb-6">
+            <FormField 
+              name="name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input className="w-65" {...field} disabled={submitting} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField 
               name="email"
               control={form.control}
@@ -99,14 +113,14 @@ export default function Auth() {
               )}
             />
           </form>
-          {signInError && <p className="text-sm text-destructive">{signInError}</p>}
+          {signUpError && <p className="text-sm text-destructive">{signUpError}</p>}
           <Button 
             className="w-full"
             type="button" 
             onClick={form.handleSubmit(onSubmit)}
           >
             {submitting && <Spinner />}
-            {submitting ? "Signing in..." : "Sign In"}
+            {submitting ? "Signing up..." : "Sign Up"}
           </Button>
         </Form>
         <div className="mask-b-from-50% mask-l-from-70% mask-r-from-70% mask-t-from-90% relative w-65">
