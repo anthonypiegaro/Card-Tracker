@@ -43,12 +43,12 @@ const chartConfig = {
 
 export function PortfolioValueHistory() {
   return (
-    <Card className="w-full px-5 py-4">
+    <Card className="w-full max-w-full px-5 py-4 scrollbar-hidden">
       <div className="flex items-center gap-x-2 text-xl font-medium">
         <LineChartIcon className="text-fuchsia-700" />
         Portfolio Value History
       </div>
-      <ChartContainer config={chartConfig} className="h-58 w-full">
+      <ChartContainer config={chartConfig} className="h-58 max-w-full">
         <LineChart data={portfolioValueData}>
           <CartesianGrid vertical={false} />
           <XAxis 

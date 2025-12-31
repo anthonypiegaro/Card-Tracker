@@ -113,6 +113,9 @@ export const appraisal = pgTable("appraisal", {
   cardId: uuid("card_id").notNull().references(() => card.id, { onDelete: "cascade" }),
   lowerBound: numeric("lower_bound", { precision: 10, scale: 2 }).notNull(),
   upperBound: numeric("upper_bound", { precision: 10, scale: 2 }).notNull(),
+  average: numeric("average", { precision: 10, scale: 2 }).notNull(),
+  median: numeric("median", { precision: 10, scale: 2 }).notNull(),
+  estimate: numeric("estimate", { precision: 10, scale: 2 }).notNull(),
   appraisalDate: date("appraisal_date").notNull()
 })
 

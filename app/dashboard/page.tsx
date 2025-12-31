@@ -4,7 +4,7 @@ import { SettingsTab } from "./settings-tab"
 
 export default function Dashboard() {
   return (
-    <div className="text-4xl">
+    <div className="w-dvw h-dvh text-4xl scrollbar-hidden">
       <Logo />
       <SettingsTab />
       <Charts />
