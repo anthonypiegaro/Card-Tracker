@@ -73,7 +73,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="h-150">
+    <div className="h-150 my-15">
       <div className="flex items-center gap-x-2 py-4">
         <Input 
           placeholder="Filter cards..."
@@ -156,8 +156,8 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex justify-between items-center py-4">
-        <div className="text-muted-foreground flex-1 text-sm">
+      <div className="px-1 flex justify-between items-center py-4">
+        <div className="max-sm:hidden text-muted-foreground flex-1 text-sm">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>

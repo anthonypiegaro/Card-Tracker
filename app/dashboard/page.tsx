@@ -610,7 +610,7 @@ export const tradingCards: TradingCard[] = [
 
 export default function Dashboard() {
   return (
-    <div className="w-dvw h-dvh scrollbar-hidden">
+    <div className="w-dvw h-dvh scrollbar-hidden overflow-x-hidden">
       <Logo />
       <SettingsTab />
       <Charts />
