@@ -13,6 +13,13 @@ import {
   getSortedRowModel,
   useReactTable
 } from "@tanstack/react-table"
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  ChevronsLeft, 
+  ChevronsRight, 
+  Plus 
+} from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -37,7 +44,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table"
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Plus } from "lucide-react"
+import { useIsMobile } from "@/lib/hooks/use-is-mobile"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -48,8 +55,13 @@ export function DataTable<TData, TValue>({
   columns,
   data
 }: DataTableProps<TData, TValue>) {
+  const isMobile = useIsMobile()
+
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    lowerBound: isMobile ? false : true,
+    upperBound: isMobile ? false : true
+  })
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([])
 
