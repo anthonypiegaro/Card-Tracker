@@ -1,5 +1,5 @@
-import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, boolean, index } from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
+import { pgTable, text, timestamp, boolean, index, uuid, integer, numeric, date } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -91,6 +91,30 @@ export const accountRelations = relations(account, ({ one }) => ({
     references: [user.id],
   }),
 }));
+
+/* Do not edit above. The tables above are used for Auth */
+
+export const card = pgTable("card", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  notes: text("notes").notNull().default(""),
+  quantity: integer().notNull(),
+  createdAt: timestamp("created_at")
+    .default(sql`now()`)
+    .notNull(),
+  updatedAt: timestamp("updated_at")
+    .default(sql`now()`)
+    .notNull(),
+})
+
+export const appraisal = pgTable("appraisal", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  cardId: uuid("card_id").notNull().references(() => card.id, { onDelete: "cascade" }),
+  lowerBound: numeric("lower_bound", { precision: 10, scale: 2 }).notNull(),
+  upperBound: numeric("upper_bound", { precision: 10, scale: 2 }).notNull(),
+  appraisalDate: date("appraisal_date").notNull()
+})
 
 export const schema = {
   user,

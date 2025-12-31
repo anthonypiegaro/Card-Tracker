@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { SignInButton } from "@/components/sign-in-button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { DottedGlowBackground } from "@/components/ui/dotted-glow-background"
 import { Button } from "@/components/ui/button"
@@ -29,9 +30,7 @@ export default function Home() {
           Track your collection, stay organized, and get real‑time pricing for every card you own.
         </p>
         <div className="flex gap-x-2">
-          <Button className="cursor-pointer z-100 mb-4" asChild>
-            <Link href="/auth">Sign In</Link>
-          </Button>
+          <SignInButton />
           <ThemeToggle />
         </div>
       </div>

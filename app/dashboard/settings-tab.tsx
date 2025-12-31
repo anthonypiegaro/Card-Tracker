@@ -5,7 +5,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 
 export function SettingsTab() {
   return (
-    <div className="fixed top-5 right-5 flex items-center border rounded-md">
+    <div className="fixed top-5 right-2 md:right-5 flex items-center border rounded-md backdrop-blur-md">
       <SignOutButton />
       <ThemeToggle />
     </div>
