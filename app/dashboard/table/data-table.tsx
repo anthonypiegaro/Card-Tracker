@@ -49,11 +49,13 @@ import { useIsMobile } from "@/lib/hooks/use-is-mobile"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  onOpenCreateNewCardDialog: () => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  data
+  data,
+  onOpenCreateNewCardDialog
 }: DataTableProps<TData, TValue>) {
   const isMobile = useIsMobile()
 
@@ -119,7 +121,11 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button variant="outline" className="gap-x-1 md:ml-auto">
+        <Button 
+          variant="outline" 
+          className="gap-x-1 md:ml-auto"
+          onClick={onOpenCreateNewCardDialog}
+        >
           <Plus className="w-4 h-4" />
           Card
         </Button>

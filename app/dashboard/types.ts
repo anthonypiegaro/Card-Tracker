@@ -18,10 +18,10 @@ export type TradingCard = {
   appraisalData: {
     id: string
     appraisalDate: string
-    lowerBound: number
-    upperBound: number
-    median: number
-    average: number
-    estimate: number
+    lowerBound: string
+    upperBound: string
+    median: string
+    average: string
+    estimate: string
   }[]
 }
