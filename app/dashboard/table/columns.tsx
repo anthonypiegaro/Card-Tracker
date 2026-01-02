@@ -130,6 +130,8 @@ export const columns: ColumnDef<TradingCard>[] = [
           ?.openCardDeleteDialog(tradingCard)
       }
 
+      const ebayURL = "https://www.ebay.com/sch/i.html?_nkw=" + encodeURIComponent(tradingCard.name)
+
       return (
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
@@ -142,8 +144,13 @@ export const columns: ColumnDef<TradingCard>[] = [
             <DropdownMenuItem>
               View Details
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              View Listing
+            <DropdownMenuItem asChild>
+              <a
+                href={ebayURL}
+                target="_blank"
+              >
+                View Listing
+              </a>
             </DropdownMenuItem>
             <DropdownMenuItem variant="destructive" onClick={handleDeleteClick}>
               Delete Card
