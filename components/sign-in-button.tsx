@@ -8,7 +8,7 @@ import { authClient } from "@/lib/auth-client"
 export function SignInButton() {
   const session = authClient.useSession()
 
-  if (session) {
+  if (session.data?.user) {
     return (
       <Button className="cursor-pointer z-100 mb-4">
         <Link href="/dashboard">Dashboard</Link>

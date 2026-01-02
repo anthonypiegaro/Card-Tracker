@@ -122,8 +122,13 @@ export const columns: ColumnDef<TradingCard>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
+    cell: ({ table, row }) => {
       const tradingCard = row.original
+
+      const handleDeleteClick = () => {
+        (table.options.meta as { openCardDeleteDialog: (tradingCard: TradingCard) => void })
+          ?.openCardDeleteDialog(tradingCard)
+      }
 
       return (
         <DropdownMenu modal={false}>
@@ -140,7 +145,7 @@ export const columns: ColumnDef<TradingCard>[] = [
             <DropdownMenuItem>
               View Listing
             </DropdownMenuItem>
-            <DropdownMenuItem variant="destructive">
+            <DropdownMenuItem variant="destructive" onClick={handleDeleteClick}>
               Delete Card
             </DropdownMenuItem>
           </DropdownMenuContent>

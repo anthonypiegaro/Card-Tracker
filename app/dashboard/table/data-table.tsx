@@ -46,16 +46,20 @@ import {
 } from "@/components/ui/table"
 import { useIsMobile } from "@/lib/hooks/use-is-mobile"
 
+import { TradingCard } from "../types"
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   onOpenCreateNewCardDialog: () => void
+  setCardToDelete: (card: TradingCard) => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  onOpenCreateNewCardDialog
+  onOpenCreateNewCardDialog,
+  setCardToDelete
 }: DataTableProps<TData, TValue>) {
   const isMobile = useIsMobile()
 
@@ -83,6 +87,11 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       sorting
+    },
+    meta: {
+      openCardDeleteDialog: (tradingCard: TradingCard) => {
+        setCardToDelete(tradingCard)
+      }
     }
   })
 
