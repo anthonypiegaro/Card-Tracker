@@ -1,6 +1,6 @@
 export type PortfolioValueChartData = {
   month: string
-  value: number 
+  value: number
 }
 
 export type TradingCard = {
@@ -8,8 +8,8 @@ export type TradingCard = {
   name: string
   notes: string
   quantity: number
-  createdAt: string
-  updatedAt: string
+  createdAt: Date
+  updatedAt: Date
   lowerBound: string
   upperBound: string
   median: string
@@ -17,7 +17,7 @@ export type TradingCard = {
   estimate: string
   appraisalData: {
     id: string
-    appraisalDate: string
+    appraisalDate: Date
     lowerBound: string
     upperBound: string
     median: string

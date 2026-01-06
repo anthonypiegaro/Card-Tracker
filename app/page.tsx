@@ -1,9 +1,6 @@
-import Link from "next/link"
-
 import { SignInButton } from "@/components/sign-in-button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { DottedGlowBackground } from "@/components/ui/dotted-glow-background"
-import { Button } from "@/components/ui/button"
 
 export default function Home() {
   return (

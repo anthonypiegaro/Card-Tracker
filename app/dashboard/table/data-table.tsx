@@ -53,13 +53,15 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
   onOpenCreateNewCardDialog: () => void
   setCardToDelete: (card: TradingCard) => void
+  setDetailsDialogCard: (card: TradingCard) => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   onOpenCreateNewCardDialog,
-  setCardToDelete
+  setCardToDelete,
+  setDetailsDialogCard
 }: DataTableProps<TData, TValue>) {
   const isMobile = useIsMobile()
 
@@ -91,12 +93,15 @@ export function DataTable<TData, TValue>({
     meta: {
       openCardDeleteDialog: (tradingCard: TradingCard) => {
         setCardToDelete(tradingCard)
+      },
+      openCardDetailsDialog: (tradingCard: TradingCard) => {
+        setDetailsDialogCard(tradingCard)
       }
     }
   })
 
   return (
-    <div className="h-150 my-15">
+    <div className="my-15">
       <div className="flex items-center gap-x-2 py-4">
         <Input 
           placeholder="Filter cards..."

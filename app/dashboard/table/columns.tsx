@@ -130,6 +130,11 @@ export const columns: ColumnDef<TradingCard>[] = [
           ?.openCardDeleteDialog(tradingCard)
       }
 
+      const handleDetailsClick = () => {
+        (table.options.meta as { openCardDetailsDialog: (tradingCard: TradingCard) => void })
+          ?.openCardDetailsDialog(tradingCard)
+      }
+
       const ebayURL = "https://www.ebay.com/sch/i.html?_nkw=" + encodeURIComponent(tradingCard.name)
 
       return (
@@ -141,7 +146,7 @@ export const columns: ColumnDef<TradingCard>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDetailsClick}>
               View Details
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
