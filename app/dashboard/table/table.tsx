@@ -25,11 +25,12 @@ const dummyCard: TradingCard = {
 }
 
 export function Table({
-  tradingCards
+  cards,
+  setCards
 }: {
-  tradingCards: TradingCard[]
+  cards: TradingCard[]
+  setCards: React.Dispatch<React.SetStateAction<TradingCard[]>>
 }) {
-  const [cards, setCards] = useState<TradingCard[]>(tradingCards)
   const [createNewCardDialogOpen, setCreateNewCardDialogOpen] = useState(false)
   const [cardToDelete, setCardToDelete] = useState<null | TradingCard>(null)
   const [detailsDialogCard, setDetailsDialogCard] = useState<null | TradingCard>(null)

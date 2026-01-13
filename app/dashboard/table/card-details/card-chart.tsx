@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/chart"
 
 import { TradingCard } from "../../types"
-import { Card } from "@/components/ui/card"
 
 type AppraisalChartPoint = {
   month: string

@@ -1,7 +1,6 @@
-import { Charts } from "./charts/charts"
 import { Logo } from "./logo"
 import { SettingsTab } from "./settings-tab"
-import { Table } from "./table/table"
+import { Wrapper } from "./wrapper"
 
 import { TradingCard } from "./types"
 
@@ -231,8 +230,7 @@ export default function Dashboard() {
     <div className="overflow-x-hidden">
       <Logo />
       <SettingsTab />
-      <Charts />
-      <Table tradingCards={tradingCards} />
+      <Wrapper tradingCards={tradingCards} />
     </div>
   )
 }

@@ -83,8 +83,8 @@ export function CreateNewCardDialog({
         name: values.name,
         quantity: values.quantity,
         notes: values.notes,
-        createdAt: (new Date()).toDateString(),
-        updatedAt: (new Date()).toDateString(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
         lowerBound: "0.35",
         upperBound: "2.03",
         median: "1.00",
@@ -93,7 +93,7 @@ export function CreateNewCardDialog({
         appraisalData: [
           {
             id: uuidv4(),
-            appraisalDate: "December",
+            appraisalDate: new Date(),
             lowerBound: "0.35",
             upperBound: "2.03",
             median: "1.00",

@@ -1,8 +1,3 @@
-export type PortfolioValueChartData = {
-  month: string
-  value: number
-}
-
 export type TradingCard = {
   id: string
   name: string
