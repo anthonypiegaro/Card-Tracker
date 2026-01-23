@@ -113,8 +113,6 @@ export function PortfolioValueHistory({
     return sortedPortfolioValueData
   }, [cards])
 
-  console.log(JSON.stringify(portfolioValueData))
-
   const chartData = useMemo(() => {
     const data = portfolioValueData.map(monthData => {
       let value = 0

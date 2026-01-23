@@ -20,3 +20,12 @@ export type TradingCard = {
     estimate: string
   }[]
 }
+
+export type Appraisal = {
+  lowerBound: number
+  median: number
+  average: number
+  estimate: number
+  upperBound: number
+  confidence: number
+}

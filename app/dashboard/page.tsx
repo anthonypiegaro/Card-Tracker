@@ -225,7 +225,7 @@ export const tradingCards: TradingCard[] = [
   // (Continue for cards 10–25 using the same conversion pattern)
 ]
 
-export default function Dashboard() {
+export default async  function Dashboard() {
   return (
     <div className="overflow-x-hidden">
       <Logo />
