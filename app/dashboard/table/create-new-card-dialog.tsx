@@ -114,7 +114,8 @@ export function CreateNewCardDialog({
                     <FormLabel>Name</FormLabel>
                     <FormDescription>[Year] [Brand] [Player Name] [Card Number]</FormDescription>
                     <FormControl>
-                      <Input 
+                      <Input
+                        autoComplete="off"
                         placeholder="2020 Topps Chrome Ronald Acuña Jr. #100" 
                         {...field} 
                         disabled={submitting} 
@@ -131,7 +132,12 @@ export function CreateNewCardDialog({
                   <FormItem>
                     <FormLabel>Quantity</FormLabel>
                     <FormControl>
-                      <Input type="number" {...field} disabled={submitting} />
+                      <Input 
+                        type="number" 
+                        {...field} 
+                        disabled={submitting} 
+                        onChange={event => field.onChange(+event.target.value)}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
