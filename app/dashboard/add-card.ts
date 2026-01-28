@@ -1,10 +1,85 @@
 "use server"
 
+import { headers } from "next/headers"
+import { redirect } from "next/navigation"
+
+import { db } from "@/db/db"
+import { appraisal, card } from "@/db/schema"
+import { auth } from "@/lib/auth"
 import { getEbayAccessToken } from "@/lib/ebay-auth"
 
-import { Appraisal } from "./types"
+import { Appraisal, TradingCard } from "./types"
+import { TradingCardSchema } from "./table/create-new-card-dialog"
 
-export async function getCardAppraisal(cardName: string): Promise<Appraisal> {
+export async function addCard(newCard: TradingCardSchema): Promise<TradingCard> {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
+
+  if (!session) {
+    redirect("/")
+  }
+
+  const userId = session.user.id
+
+  if (newCard.name.length < 5) {
+    throw new Error(`Card name "${newCard.name}" is invalid. name < 5 characters`)
+  }
+
+  const cardAppraisal = await getCardAppraisal(newCard.name)
+
+  const data = await db.transaction(async tx => {
+    const cardRes = await tx.insert(card).values({
+      id: newCard.id,
+      userId: userId,
+      name: newCard.name,
+      notes: newCard.notes,
+      quantity: newCard.quantity
+    }).returning({
+      createdAt: card.createdAt,
+      updatedAt: card.updatedAt
+    })
+
+    const appraisalRes = await tx.insert(appraisal).values({
+      cardId: newCard.id,
+      lowerBound: cardAppraisal.lowerBound.toString(),
+      upperBound: cardAppraisal.upperBound.toString(),
+      average: cardAppraisal.average.toString(),
+      median: cardAppraisal.median.toString(),
+      estimate: cardAppraisal.estimate.toString()
+    }).returning({
+      id: appraisal.id,
+      appraisalDate: appraisal.appraisalDate
+    })
+
+    return {
+      id: newCard.id,
+      name: newCard.name,
+      notes: newCard.notes,
+      quantity: newCard.quantity,
+      createdAt: cardRes[0].createdAt,
+      updatedAt: cardRes[0].updatedAt,
+      lowerBound: cardAppraisal.lowerBound.toString(),
+      upperBound: cardAppraisal.upperBound.toString(),
+      average: cardAppraisal.average.toString(),
+      median: cardAppraisal.median.toString(),
+      estimate: cardAppraisal.estimate.toString(),
+      appraisalData: [{
+        id: appraisalRes[0].id,
+        appraisalDate: appraisalRes[0].appraisalDate,
+        lowerBound: cardAppraisal.lowerBound.toString(),
+        upperBound: cardAppraisal.upperBound.toString(),
+        average: cardAppraisal.average.toString(),
+        median: cardAppraisal.median.toString(),
+        estimate: cardAppraisal.estimate.toString()
+      }]
+    }
+  })
+
+  return data
+}
+
+async function getCardAppraisal(cardName: string): Promise<Appraisal> {
   // make the api call
   const accessToken = await getEbayAccessToken()
   

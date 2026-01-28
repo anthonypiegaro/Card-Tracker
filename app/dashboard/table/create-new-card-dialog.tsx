@@ -27,8 +27,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Spinner } from "@/components/ui/spinner"
 import { Textarea } from "@/components/ui/textarea"
-import { mockApiCall } from "@/lib/utils"
 
+import { addCard } from "../add-card"
 import { TradingCard } from "../types"
 
 export const tradingCardSchema = z.object({
@@ -75,47 +75,19 @@ export function CreateNewCardDialog({
   const onSubmit = async (values: TradingCardSchema) => {
     setSubmitting(true)
 
-    await mockApiCall<TradingCard>({
-      delay: 3000,
-      shouldSucceed: true,
-      responseData: { 
-        id: values.id,
-        name: values.name,
-        quantity: values.quantity,
-        notes: values.notes,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        lowerBound: "0.35",
-        upperBound: "2.03",
-        median: "1.00",
-        average: "1.04",
-        estimate: ".88",
-        appraisalData: [
-          {
-            id: uuidv4(),
-            appraisalDate: new Date(),
-            lowerBound: "0.35",
-            upperBound: "2.03",
-            median: "1.00",
-            average: "1.04",
-            estimate: ".88",
-          }
-        ]
-      },
-      errorData: { message: "error" }
-    })
-    .then(data => {
-      toast.success("Success", {
-        description: `${values.name} has been added to your portfolio`
+    await addCard(values)
+      .then(data => {
+        toast.success("Success", {
+          description: `${values.name} has been added to your portfolio`
+        })
+        onSuccess(data)
+        handleOpenChange(false)
       })
-      onSuccess(data)
-      handleOpenChange(false)
-    })
-    .catch(e => {
-      toast.error("Error", {
-        description: e.message
+      .catch(e => {
+        toast.error("Error", {
+          description: e.message
+        })
       })
-    })
 
     setSubmitting(false)
   }

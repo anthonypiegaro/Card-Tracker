@@ -116,7 +116,7 @@ export const appraisal = pgTable("appraisal", {
   average: numeric("average", { precision: 10, scale: 2 }).notNull(),
   median: numeric("median", { precision: 10, scale: 2 }).notNull(),
   estimate: numeric("estimate", { precision: 10, scale: 2 }).notNull(),
-  appraisalDate: timestamp("appraisalDate")
+  appraisalDate: timestamp("appraisal_date")
     .default(sql`now()`)
     .notNull()
 })
