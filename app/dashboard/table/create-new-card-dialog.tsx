@@ -136,7 +136,7 @@ export function CreateNewCardDialog({
                         type="number" 
                         {...field} 
                         disabled={submitting} 
-                        onChange={event => field.onChange(+event.target.value)}
+                        onChange={event => field.onChange(event.target.value === "" ? "" : +event.target.value)}
                       />
                     </FormControl>
                     <FormMessage />
