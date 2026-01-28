@@ -51,6 +51,8 @@ export const columns: ColumnDef<TradingCard>[] = [
   },
   {
     accessorKey: "lowerBound",
+    accessorFn: row => Number(row.lowerBound),
+    sortingFn: "basic",
     header: ({ column }) => {
       return (
         <Button
@@ -74,6 +76,8 @@ export const columns: ColumnDef<TradingCard>[] = [
   },
   {
     accessorKey: "upperBound",
+    accessorFn: row => Number(row.upperBound),
+    sortingFn: "basic",
     header: ({ column }) => {
       return (
         <Button
@@ -97,6 +101,8 @@ export const columns: ColumnDef<TradingCard>[] = [
   },
   {
     accessorKey: "estimate",
+    accessorFn: row => Number(row.estimate),
+    sortingFn: "basic",
     header: ({ column }) => {
       return (
         <div className="flex justify-end">
