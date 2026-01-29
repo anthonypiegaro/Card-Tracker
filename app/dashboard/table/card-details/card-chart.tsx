@@ -16,6 +16,7 @@ import {
   ChartTooltip, 
   ChartTooltipContent 
 } from "@/components/ui/chart"
+import { usdFormatter } from "@/lib/formatters/usd-formatter"
 
 import { TradingCard } from "../../types"
 
@@ -121,7 +122,13 @@ export function CardChart({
               tickMargin={10}
             />
             <YAxis domain={["auto", "auto"]} hide={true} />
-            <ChartTooltip content={<ChartTooltipContent />} />
+            <ChartTooltip 
+              content={
+                <ChartTooltipContent 
+                  valueFormatter={val => usdFormatter.format(Number(val))}
+                />
+              } 
+            />
             <Line 
               dataKey="value" 
               stroke="var(--color-value)" 

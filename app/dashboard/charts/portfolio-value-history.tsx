@@ -16,6 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent
 } from "@/components/ui/chart"
+import { usdFormatter } from "@/lib/formatters/usd-formatter"
 
 const chartConfig = {
   value: {
@@ -51,7 +52,13 @@ export function PortfolioValueHistory({
             padding={{ left: 20, right: 20 }}
           />
           <YAxis domain={["auto", "auto"]} hide={true} />
-          <ChartTooltip content={<ChartTooltipContent />} />
+          <ChartTooltip 
+            content={
+              <ChartTooltipContent 
+                valueFormatter={val => usdFormatter.format(Number(val))}
+              />
+            } 
+          />
           <Line 
             dataKey="value" 
             stroke="var(--color-value)" 
