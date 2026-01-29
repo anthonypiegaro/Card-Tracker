@@ -13,18 +13,6 @@ import {
 } from "@/components/ui/card"
 import { usdFormatter } from "@/lib/formatters/usd-formatter"
 
-import { TradingCard } from "../types"
-
-type MonthlyAppraisalData = {
-  dateKey: string
-  label: string
-  lowerBound: number
-  upperBound: number
-  median: number
-  average: number
-  estimate: number
-}
-
 export function PortfolioValue({
   portfolioValue,
   monthlyPercentChange

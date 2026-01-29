@@ -29,3 +29,9 @@ export type Appraisal = {
   upperBound: number
   confidence: number
 }
+
+export type PortfolioValuation = {
+  id: string
+  value: number
+  date: Date
+}

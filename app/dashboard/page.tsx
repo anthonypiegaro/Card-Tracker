@@ -3,17 +3,19 @@ import { SettingsTab } from "./settings-tab"
 import { Wrapper } from "./wrapper"
 
 import { getCards } from "./get-cards"
-
-import { TradingCard } from "./types"
+import { getPortfolioEvaluations } from "./get-portfolio-evaluations"
 
 export default async  function Dashboard() {
-  const tradingCards = await getCards()
+  const [tradingCards, portfolioValuations] = await Promise.all([
+    getCards(),
+    getPortfolioEvaluations()
+  ])
 
   return (
     <div className="overflow-x-hidden">
       <Logo />
       <SettingsTab />
-      <Wrapper tradingCards={tradingCards} />
+      <Wrapper tradingCards={tradingCards} portfolioValuations={portfolioValuations}/>
     </div>
   )
 }
