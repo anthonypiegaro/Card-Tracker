@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { usdFormatter } from "@/lib/formatters/usd-formatter"
 
 import type { TradingCard } from "../../types"
 
@@ -32,27 +33,27 @@ export function CardDetails({
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div className="rounded-lg border bg-muted/30 p-3 space-y-1">
             <div className="text-xs font-medium text-muted-foreground">Lower Bound</div>
-            <div className="text-lg font-semibold">${card.lowerBound.toLocaleString()}</div>
+            <div className="text-lg font-semibold">{usdFormatter.format(Number(card.lowerBound))}</div>
           </div>
 
           <div className="rounded-lg border bg-muted/30 p-3 space-y-1">
             <div className="text-xs font-medium text-muted-foreground">Upper Bound</div>
-            <div className="text-lg font-semibold">${card.upperBound.toLocaleString()}</div>
+            <div className="text-lg font-semibold">{usdFormatter.format(Number(card.upperBound))}</div>
           </div>
 
           <div className="rounded-lg border bg-muted/30 p-3 space-y-1">
             <div className="text-xs font-medium text-muted-foreground">Average</div>
-            <div className="text-lg font-semibold">${card.average.toLocaleString()}</div>
+            <div className="text-lg font-semibold">{usdFormatter.format(Number(card.average))}</div>
           </div>
 
           <div className="rounded-lg border bg-muted/30 p-3 space-y-1">
             <div className="text-xs font-medium text-muted-foreground">Median</div>
-            <div className="text-lg font-semibold">${card.median.toLocaleString()}</div>
+            <div className="text-lg font-semibold">{usdFormatter.format(Number(card.median))}</div>
           </div>
 
           <div className="rounded-lg border bg-primary/5 p-3 space-y-1 col-span-2 sm:col-span-2">
             <div className="text-xs font-medium text-muted-foreground">Current Estimate</div>
-            <div className="text-2xl font-bold text-primary">${card.estimate.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-primary">{usdFormatter.format(Number(card.estimate))}</div>
           </div>
         </div>
       </div>

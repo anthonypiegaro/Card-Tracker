@@ -31,7 +31,7 @@ type AppraisalChartPoint = {
 function prepareAppraisalChartData(card: TradingCard): AppraisalChartPoint[] {
   const monthGroups: Record<string, AppraisalChartPoint[]> = {}
 
-  for (const appraisal of card.appraisalData) {
+  for (const appraisal of card.appraisals) {
     const date = appraisal.appraisalDate
     const monthKey = date.toLocaleString("en-US", {
       month: "short",
