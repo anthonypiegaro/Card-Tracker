@@ -9,6 +9,7 @@ export function Charts({
 }: {
   cards: TradingCard[]
 }) {
+  
   return (
     <div className="px-2 my-18 md:my-12 mx-auto max-w-full md:max-w-3xl grid md:grid-cols-2 gap-2">
       <div className="w-full md:col-span-2">

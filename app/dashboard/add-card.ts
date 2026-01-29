@@ -64,7 +64,7 @@ export async function addCard(newCard: TradingCardSchema): Promise<TradingCard> 
       average: cardAppraisal.average.toString(),
       median: cardAppraisal.median.toString(),
       estimate: cardAppraisal.estimate.toString(),
-      appraisalData: [{
+      appraisals: [{
         id: appraisalRes[0].id,
         appraisalDate: appraisalRes[0].appraisalDate,
         lowerBound: cardAppraisal.lowerBound.toString(),

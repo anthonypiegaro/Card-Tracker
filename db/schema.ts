@@ -121,11 +121,30 @@ export const appraisal = pgTable("appraisal", {
     .notNull()
 })
 
+export const cardRelations = relations(card, ({ many, one }) => ({
+  appraisals: many(appraisal),
+  user: one(user, {
+    fields: [card.userId],
+    references: [user.id],
+  }),
+}))
+
+export const appraisalRelations = relations(appraisal, ({ one }) => ({
+  card: one(card, {
+    fields: [appraisal.cardId],
+    references: [card.id],
+  }),
+}))
+
 export const schema = {
   user,
   session,
   account,
   verification,
   userRelations,
-  accountRelations
+  accountRelations,
+  card,
+  appraisal,
+  cardRelations,
+  appraisalRelations
 }
