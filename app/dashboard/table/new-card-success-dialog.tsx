@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { usdFormatter } from "@/lib/formatters/usd-formatter"
 
 export type NewCardSuccessDialogDetails = {
   name: string
@@ -27,6 +28,12 @@ export function NewCardSuccessDialog({
   onOpenChange: (open: boolean) => void
   details: NewCardSuccessDialogDetails
 }) {
+  const estimate = usdFormatter.format(Number(details.estimate))
+  const lowerBound = usdFormatter.format(Number(details.lowerBound))
+  const upperBound = usdFormatter.format(Number(details.upperBound))
+  const median = usdFormatter.format(Number(details.median))
+  const average = usdFormatter.format(Number(details.average))
+
   return (
     <Dialog
       open={open}
@@ -44,21 +51,21 @@ export function NewCardSuccessDialog({
           </div>
 
           <div className="text-center mb-4">
-            <span className="border-b-2 border-primary text-3xl font-medium">${details.estimate}</span>
+            <span className="border-b-2 border-primary text-3xl font-medium">{estimate}</span>
             <div className="py-1 text-muted-foreground">Estimated Market Value</div>
           </div>
 
           <div className="grid grid-cols-2">
             <div className="text-center col-span-2">
-              <span className="text-xl">${details.lowerBound} - ${details.upperBound}</span>
+              <span className="text-xl">{lowerBound} - {upperBound}</span>
               <div className="text-muted-foreground -translate-y-1.5 text-sm">range</div>
             </div>
             <div className="text-center">
-              <span className="text-xl">${details.median}</span>
+              <span className="text-xl">{median}</span>
               <div className="text-muted-foreground -translate-y-1.5 text-sm">median</div>
             </div>
             <div className="text-center">
-              <span className="text-xl">${details.average}</span>
+              <span className="text-xl">{average}</span>
               <div className="text-muted-foreground -translate-y-1.5 text-sm">average</div>
             </div>
           </div>
