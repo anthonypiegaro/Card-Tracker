@@ -20,21 +20,6 @@ import {
 
 import { TradingCard } from "../types"
 
-// export const portfolioValueData: PortfolioValueChartData[] = [
-//   { month: "Jan", value: 4820 },
-//   { month: "Feb", value: 4950 },
-//   { month: "Mar", value: 5120 },
-//   { month: "Apr", value: 4990 },
-//   { month: "May", value: 5250 },
-//   { month: "Jun", value: 5410 },
-//   { month: "Jul", value: 5580 },
-//   { month: "Aug", value: 5610 },
-//   { month: "Sep", value: 5730 },
-//   { month: "Oct", value: 5960 },
-//   { month: "Nov", value: 6120 },
-//   { month: "Dec", value: 6375 },
-// ]
-
 const chartConfig = {
   value: {
     label: "Value",
@@ -65,7 +50,7 @@ export function PortfolioValueHistory({
     const acc: Record<string, MonthlyAppraisalData> = {}
 
     for (const card of cards) {
-      card.appraisalData.forEach(appraisal => {
+      card.appraisals.forEach(appraisal => {
         const date = new Date(appraisal.appraisalDate)
 
         const parts = new Intl.DateTimeFormat("en-US", {

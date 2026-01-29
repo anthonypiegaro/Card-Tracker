@@ -9,15 +9,10 @@ import {
 import { TradingCard } from "../types"
 
 export function TotalCards({
-  cards
+  totalCards
 }: {
-  cards: TradingCard[]
+  totalCards: number
 }) {
-  const totalCards = cards.reduce((acc, card) => {
-    acc = acc + card.quantity
-    return acc
-  }, 0)
-
   return (
     <Card className="flex flex-col gap-y-2">
       <div className="px-5 flex flex-row items-center text-xl gap-2">

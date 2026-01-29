@@ -34,7 +34,7 @@ export function PortfolioValue({
       const acc: Record<string, MonthlyAppraisalData> = {}
   
       for (const card of cards) {
-        card.appraisalData.forEach(appraisal => {
+        card.appraisals.forEach(appraisal => {
           const date = new Date(appraisal.appraisalDate)
   
           const parts = new Intl.DateTimeFormat("en-US", {
