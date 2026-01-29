@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
-import { eq } from "drizzle-orm"
+import { asc, eq } from "drizzle-orm"
 
 import { db } from "@/db/db"
 import { portfolioValuation } from "@/db/schema"
@@ -27,6 +27,7 @@ export const getPortfolioEvaluations = async () => {
     })
     .from(portfolioValuation)
     .where(eq(portfolioValuation.userId, userId))
+    .orderBy(asc(portfolioValuation.createdAt))
 
   const portfolioValuationsCleaned = portfolioValuations.map(v => ({
     ...v,
