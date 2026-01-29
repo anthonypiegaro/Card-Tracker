@@ -119,6 +119,23 @@ export const appraisal = pgTable("appraisal", {
   appraisalDate: timestamp("appraisal_date")
     .default(sql`now()`)
     .notNull()
+}, (table) => {
+  return {
+    cardIdIdx: index("appraisal_card_id_idx").on(table.cardId),
+    cardIdDateIdx: index("appraisal_card_id_date_idx").on(table.cardId, table.appraisalDate)
+  }
+})
+
+export const portfolioValuation = pgTable("portfolio_evaluation", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  value: numeric("value").notNull(),
+  createdAt: timestamp("created_at")
+    .default(sql`now()`)
+    .notNull(),
+  updatedAt: timestamp("updated_at")
+    .default(sql`now()`)
+    .notNull(),
 })
 
 export const cardRelations = relations(card, ({ many, one }) => ({
@@ -145,6 +162,7 @@ export const schema = {
   accountRelations,
   card,
   appraisal,
+  portfolioValuation,
   cardRelations,
   appraisalRelations
 }
